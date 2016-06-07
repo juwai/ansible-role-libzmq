@@ -1,14 +1,23 @@
 ---
 galaxy_info:
   author: Juwai Limited
-  description:
+  description: Ansible role for installing zeromq
   company: Juwai Limited
-  license: MIT / BSD
-  min_ansible_version: 1.9
+  license: MIT
+  min_ansible_version: 2.0
+
   platforms:
   - name: EL
     versions:
     - 6
-  - name: Amazon
-    versions:
-    - 2015.09
+
+  # commented out amazon as 2015.09 is not recognized and causes
+  # validation errors on ansible galaxy
+  #
+  #- name: Amazon
+  #  versions:
+  #  - 2015.09
+
+  galaxy_tags: [amazon, centos6, zeromq, libzmq]
+
+dependencies: []
