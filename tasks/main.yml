@@ -21,7 +21,7 @@
 
 - name: download libzmq source to the target
   get_url:
-    url: "https://archive.org/download/zeromq_{{ zeromq_version }}/zeromq-{{ zeromq_version }}.tar.gz"
+    url: "{{ zeromq_download_url }}"
     dest: "/tmp/zeromq-{{ zeromq_version }}.tar.gz"
     validate_certs: no
 
