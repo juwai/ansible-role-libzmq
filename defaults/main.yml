@@ -1,3 +1,5 @@
 ---
 zeromq_version: 4.0.5
-zeromq_download_url: "https://archive.org/download/zeromq_{{ zeromq_version }}/zeromq-{{ zeromq_version }}.tar.gz"
+zeromq_download_url: "https://github.com/zeromq/zeromq4-x/releases/download/v{{ zeromq_version }}/zeromq-{{ zeromq_version }}.tar.gz"
+
+
