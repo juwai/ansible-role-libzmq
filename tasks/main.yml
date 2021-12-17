@@ -1,37 +1,39 @@
 ---
-- name: ensure dependence packages present
+- name: ensure dependency packages present
   yum:
-    name: "{{ item }}"
+    name:
+      - 'libuuid-devel'
+      - 'libtool'
+      - 'pkgconfig'
+      - 'autoconf'
+      - 'automake'
+      - 'gcc'
+      - 'gcc-c++'
+      - 'make'
     state: present
-  with_items:
-    - libuuid-devel
-    - libtool
-    - pkgconfig
-    - autoconf
-    - automake
-    - gcc
-    - gcc-c++
-    - make
 
 - name: install libsodium-devel for zeromq new version
   yum:
-    name: libsodium-devel
+    name: 'libsodium-devel'
     state: present
   when: zeromq_version != '4.0.5'
 
-- name: download libzmq source to the target
+- name: download libzmq source
   get_url:
-    url: "{{ zeromq_download_url }}"
-    dest: "/tmp/zeromq-{{ zeromq_version }}.tar.gz"
+    url: '{{ zeromq_download_url }}'
+    dest: '/tmp/zeromq-{{ zeromq_version }}.tar.gz'
     validate_certs: no
 
-- name: copy libzmq source to the target
-  unarchive: src=/tmp/zeromq-{{ zeromq_version }}.tar.gz dest=/tmp/ copy=no
+- name: unarchive libzmq source
+  unarchive:
+    src: '/tmp/zeromq-{{ zeromq_version }}.tar.gz'
+    dest: '/tmp/'
+    copy: no
   args:
-    creates: /tmp/zeromq-{{ zeromq_version }}
+    creates: '/tmp/zeromq-{{ zeromq_version }}'
 
 - name: install libzmq from source
-  shell: ./configure && make && make install
+  shell: './configure && make && make install'
   args:
-    chdir: /tmp/zeromq-{{ zeromq_version }}
-    creates: /usr/local/lib/libzmq.so
+    chdir: '/tmp/zeromq-{{ zeromq_version }}'
+    creates: '/usr/local/lib/libzmq.so'
